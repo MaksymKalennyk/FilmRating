@@ -1,7 +1,14 @@
 package com.example.filmrating.repo;
 
-import org.apache.catalina.User;
+import com.example.filmrating.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<Users, Long> {
+    Optional<Users> findByUsername(String username);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 }
