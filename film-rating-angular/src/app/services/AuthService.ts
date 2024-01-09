@@ -10,7 +10,7 @@ import {JwtAuthenticationResponse} from "./JwtAuthenticationResponse";
 })
 export class AuthService{
   private apiUrl = 'http://localhost:8080/auth';
-  private token: string | null = null;
+  private readonly TOKEN_KEY = 'auth_token';
 
   constructor(private http: HttpClient) { }
 
@@ -23,10 +23,10 @@ export class AuthService{
   }
 
   setToken(token: string) {
-    this.token = token;
+    sessionStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    return this.token;
+    return sessionStorage.getItem(this.TOKEN_KEY);
   }
 }

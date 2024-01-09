@@ -26,4 +26,6 @@ public class Reviews {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date reviewDate;
+
+    private int like;
 }

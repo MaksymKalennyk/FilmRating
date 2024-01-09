@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h2>Search for a Movie</h2>
+  <form (ngSubmit)="searchMovies()" #searchForm="ngForm">
+    <div class="form-group">
+      <label for="searchTerm">Search Term:</label>
+      <input type="text" class="form-control" id="searchTerm" name="searchTerm" [(ngModel)]="searchTerm">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div *ngIf="movieFound">
+    <h3>Movie Found:</h3>
+    <p>{{ foundMovie.name }}</p>
+    <p>{{ foundMovie.source }}</p>
+    <p>{{ foundMovie.genre }}</p>
+    <p>{{ foundMovie.releaseDate }}</p>
+  </div>
+</div>

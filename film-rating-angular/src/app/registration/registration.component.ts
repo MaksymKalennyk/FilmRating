@@ -24,6 +24,7 @@ export class RegistrationComponent {
       this.authService.signUp(this.user).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
+          this.router.navigate([""]);
         },
         error: (error) => {
           console.error('Error:', error);
