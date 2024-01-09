@@ -5,10 +5,11 @@ import { AppComponent } from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { RatingComponent } from './rating/rating.component';
 import { SearchMovieComponent } from './rating/search-movie/search-movie.component';
+import { ReviewComponent } from './rating/review/review.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,14 +23,16 @@ const routes: Routes = [
     RegistrationComponent,
     LoginComponent,
     RatingComponent,
-    SearchMovieComponent
+    SearchMovieComponent,
+    ReviewComponent
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
-    FormsModule,
-    HttpClientModule,
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(routes),
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

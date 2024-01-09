@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
    public Users save(Users users){
        return userRepository.save(users);
@@ -44,6 +45,10 @@ public class UserService {
     public Users getCurrentUser() {
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
+    }
+
+    public Long getUserIdFromToken(String token) {
+        return jwtService.extractUserId(token);
     }
 
     public void getAdmin() {
