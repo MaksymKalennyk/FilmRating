@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <h2>Login</h2>
+  <form (ngSubmit)="submitForm()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" required minlength="5" maxlength="50" autocomplete="current-username">
+      <div class="text-danger" *ngIf="loginForm.controls['username']?.invalid && (loginForm.controls['username']?.dirty || loginForm.controls['username']?.touched)">
+        <div *ngIf="loginForm.controls['username']?.hasError('required')">Username is required.</div>
+        <div *ngIf="loginForm.controls['username']?.hasError('minlength')">Username must be at least 5 characters.</div>
+        <div *ngIf="loginForm.controls['username']?.hasError('maxlength')">Username cannot exceed 50 characters.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required minlength="8" maxlength="255" autocomplete="current-password">
+      <div class="text-danger" *ngIf="loginForm.controls['password']?.invalid && (loginForm.controls['password']?.dirty || loginForm.controls['password']?.touched)">
+        <div *ngIf="loginForm.controls['password']?.hasError('required')">Password is required.</div>
+        <div *ngIf="loginForm.controls['password']?.hasError('minlength')">Password must be at least 8 characters.</div>
+        <div *ngIf="loginForm.controls['password']?.hasError('maxlength')">Password cannot exceed 255 characters.</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="button" class="btn btn-primary" (click)="registration()">Registration</button>
+  </form>
+</div>
