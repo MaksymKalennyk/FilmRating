@@ -5,10 +5,9 @@ import com.example.filmrating.model.dto.ReviewRequest;
 import com.example.filmrating.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -20,5 +19,16 @@ public class ReviewController {
     @PostMapping("/reviews")
     public ResponseEntity<Reviews> postReview(@RequestBody ReviewRequest reviewRequest){
         return ResponseEntity.ok(reviewService.saveReviewFromRequest(reviewRequest));
+    }
+
+    @GetMapping("/reviews/movie/{movieId}")
+    public ResponseEntity<List<Reviews>> getReviewById(@PathVariable Long movieId){
+        List<Reviews> reviews = reviewService.getReviewsByMovieId(movieId);
+
+        if (reviews.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(reviews);
     }
 }

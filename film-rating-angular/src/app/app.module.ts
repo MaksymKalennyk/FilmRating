@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RatingComponent } from './rating/rating.component';
 import { SearchMovieComponent } from './rating/search-movie/search-movie.component';
 import { ReviewComponent } from './rating/review/review.component';
+import { AllReviewsComponent } from './rating/all-reviews/all-reviews.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     LoginComponent,
     RatingComponent,
     SearchMovieComponent,
-    ReviewComponent
+    ReviewComponent,
+    AllReviewsComponent
   ],
     imports: [
         BrowserModule,
