@@ -38,7 +38,16 @@ export class ReviewService{
       'Authorization': `Bearer ${this.authService.getToken()}`
     });
     const options = { headers: headers };
+    console.log(options);
     return this.http.get<ReviewData[]>(`${this.apiUrl}/reviews/movie/${movieId}`, options);
+  }
+
+  updateReview(id: number): Observable<ReviewData> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    const options = { headers: headers };
+    return this.http.post<ReviewData>(`${this.apiUrl}/update/${id}`,{}, options);
   }
 
   getMovieId(): number {

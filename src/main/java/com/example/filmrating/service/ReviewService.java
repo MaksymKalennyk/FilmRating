@@ -49,4 +49,14 @@ public class ReviewService {
     public List<Reviews> getReviewsByMovieId(Long movieId) {
         return reviewRepository.findByMoviesId(movieId);
     }
+
+    public Reviews postLikes(Long id){
+        Optional<Reviews> reviewsOptional = reviewRepository.findById(id);
+        if (reviewsOptional.isPresent()) {
+            Reviews reviews = reviewsOptional.get();
+            reviews.setLikeCount(reviews.getLikeCount() + 1);
+            return reviewRepository.save(reviews);
+        }
+        return null;
+    }
 }

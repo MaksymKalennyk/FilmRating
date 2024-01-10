@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class ReviewController {
-
     private final ReviewService reviewService;
 
     @PostMapping("/reviews")
@@ -30,5 +29,11 @@ public class ReviewController {
         }
 
         return ResponseEntity.ok(reviews);
+    }
+
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Reviews> postLikes(@PathVariable Long id) {
+        Reviews updatedReviews = reviewService.postLikes(id);
+        return (updatedReviews != null) ? ResponseEntity.ok(updatedReviews) : ResponseEntity.notFound().build();
     }
 }

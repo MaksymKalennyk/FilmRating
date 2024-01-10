@@ -5,8 +5,10 @@
       <p>Rating: {{ review.rating }}</p>
       <p>Review Text: {{ review.reviewText }}</p>
       <p>Review Date: {{ review.reviewDate }}</p>
-      <p>Like Count: {{ review.likeCount }}</p>
       <p>Author: {{ review.users.username }}</p>
+      <button type="button" class="btn btn-outline-primary" (click)="increaseLikeCount(review)">
+        <i class="bi bi-hand-thumbs-up"></i> Like {{ review.likeCount }}
+      </button>
     </li>
   </ul>
 </div>
