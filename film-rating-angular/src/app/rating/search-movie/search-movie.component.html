@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <h2>Search for a Movie</h2>
+  <form (ngSubmit)="searchMovies()" #searchForm="ngForm">
+    <div class="form-group">
+      <label for="searchTerm">Search Term:</label>
+      <input type="text" class="form-control" id="searchTerm" name="searchTerm" [(ngModel)]="searchTerm">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div *ngIf="movieFound" class="d-flex justify-content-center mt-4 mb-4">
+    <div class="card" style="width: 18rem;">
+      <img [src]="foundMovie.source" alt="Movie Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <h3 class="card-title">{{ foundMovie.name }}</h3>
+        <p class="card-text"><strong>Genre:</strong> {{ foundMovie.genre }}</p>
+        <p class="card-text"><strong>Release Date:</strong> {{ foundMovie.releaseDate | date: 'longDate' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

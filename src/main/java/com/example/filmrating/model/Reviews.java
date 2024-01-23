@@ -1,11 +1,16 @@
 package com.example.filmrating.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.util.Date;
 
-@Data
 @Entity
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reviews")
 public class Reviews {
 
@@ -18,7 +23,7 @@ public class Reviews {
     private Users users;
 
     @ManyToOne
-    @JoinColumn(name = "movieId", referencedColumnName = "id")
+    @JoinColumn(name = "movie_id", referencedColumnName = "id")
     private Movies movies;
 
     private int rating;
@@ -26,4 +31,6 @@ public class Reviews {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date reviewDate;
+
+    private int likeCount;
 }

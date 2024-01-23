@@ -70,4 +70,9 @@ public class JwtService {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return Long.valueOf(claims.get("id", Integer.class));
+    }
 }

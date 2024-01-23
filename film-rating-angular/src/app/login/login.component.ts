@@ -21,10 +21,10 @@ export class LoginComponent {
   }
 
   submitForm() {
-    console.log(this.user);
       this.authService.signIn(this.user).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
+          this.router.navigate(["/rating"])
         },
         error: (error) => {
           console.error('Error:', error);
