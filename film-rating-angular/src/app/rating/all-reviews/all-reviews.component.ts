@@ -11,6 +11,7 @@ export class AllReviewsComponent {
   movieId: number = 0;
   reviews: ReviewData[] = [];
   userId: number = 0;
+  errorMessage: string = "";
   likedReviews: Set<number> = new Set<number>();
 
   constructor(private reviewService: ReviewService) { }
@@ -34,15 +35,16 @@ export class AllReviewsComponent {
   }
 
   increaseLikeCount(review: ReviewData) {
+    this.errorMessage = "";
     if (this.userId && !this.likedReviews.has(review.id)) {
-      review.likeCount++;
-      this.likedReviews.add(review.id);
       this.reviewService.updateReview(review.id).subscribe({
         next: (response) =>{
+          review.likeCount++;
+          this.likedReviews.add(review.id);
           console.log(response);
         },
         error:(err) => {
-          console.error(err);
+          this.errorMessage = "This review has already been liked.";
         },
       });
     }

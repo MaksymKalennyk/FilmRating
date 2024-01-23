@@ -1,10 +1,13 @@
 package com.example.filmrating.controller;
 
 import com.example.filmrating.model.Reviews;
+import com.example.filmrating.model.Users;
 import com.example.filmrating.model.dto.ReviewRequest;
 import com.example.filmrating.service.ReviewService;
+import com.sun.security.auth.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +35,8 @@ public class ReviewController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<Reviews> postLikes(@PathVariable Long id) {
-        Reviews updatedReviews = reviewService.postLikes(id);
+    public ResponseEntity<Reviews> postLikes(@PathVariable Long id, @AuthenticationPrincipal Users users) {
+        Reviews updatedReviews = reviewService.postLikes(id, users.getId());
         return (updatedReviews != null) ? ResponseEntity.ok(updatedReviews) : ResponseEntity.notFound().build();
     }
 }
