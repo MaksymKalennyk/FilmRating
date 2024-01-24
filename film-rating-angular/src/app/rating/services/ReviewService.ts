@@ -38,7 +38,6 @@ export class ReviewService{
       'Authorization': `Bearer ${this.authService.getToken()}`
     });
     const options = { headers: headers };
-    console.log(options);
     return this.http.get<ReviewData[]>(`${this.apiUrl}/reviews/movie/${movieId}`, options);
   }
 

@@ -39,8 +39,10 @@ public class ReviewService {
         review.setUsers(user);
         review.setMovies(movie);
 
-        viewedMovieService.addViewedMovie(user.getId(), movie.getId(), review.getId());
-        return reviewRepository.save(review);
+        Reviews reviews = reviewRepository.save(review);
+
+        viewedMovieService.addViewedMovie(user.getId(), movie.getId(), reviews.getId());
+        return reviews;
     }
 
     public List<Reviews> getReviewsByMovieId(Long movieId) {
