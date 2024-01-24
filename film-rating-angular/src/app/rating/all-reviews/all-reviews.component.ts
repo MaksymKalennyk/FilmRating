@@ -22,6 +22,7 @@ export class AllReviewsComponent {
     });
 
     this.reviewService.movieId$.subscribe((movieId) => {
+      console.log(movieId);
       this.movieId = movieId;
       this.reviewService.getReviewsByMovieId(this.movieId).subscribe({
         next: (response) => {
