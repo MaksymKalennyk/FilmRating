@@ -1,15 +1,13 @@
 package com.example.filmrating.service;
 
-import com.example.filmrating.model.Movies;
-import com.example.filmrating.model.ReviewUserLike;
-import com.example.filmrating.model.Reviews;
-import com.example.filmrating.model.Users;
+import com.example.filmrating.model.*;
 import com.example.filmrating.model.dto.ReviewRequest;
 import com.example.filmrating.repo.MovieRepository;
 import com.example.filmrating.repo.ReviewRepository;
 import com.example.filmrating.repo.ReviewUserLikeRepository;
 import com.example.filmrating.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,21 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final MovieRepository movieRepository;
     private final ReviewUserLikeRepository reviewUserLikeRepository;
+    private final ViewedMovieService viewedMovieService;
 
-    @Autowired
-    public ReviewService(ReviewRepository reviewRepository, UserRepository userRepository,
-                         MovieRepository movieRepository, ReviewUserLikeRepository reviewUserLikeRepository) {
-        this.reviewRepository = reviewRepository;
-        this.userRepository = userRepository;
-        this.movieRepository = movieRepository;
-        this.reviewUserLikeRepository = reviewUserLikeRepository;
-    }
 
     public Reviews saveReviewFromRequest(ReviewRequest request) {
         Users user = userRepository.findById(request.getUserId())
@@ -47,6 +39,7 @@ public class ReviewService {
         review.setUsers(user);
         review.setMovies(movie);
 
+        viewedMovieService.addViewedMovie(user.getId(), movie.getId(), review.getId());
         return reviewRepository.save(review);
     }
 
