@@ -1,3 +1,6 @@
+<div *ngIf="errorMessage" class="alert alert-danger container mt-4">
+  {{ errorMessage }}
+</div>
 <div *ngIf="reviews.length > 0" class="container mt-4">
   <h2>Reviews for Movie</h2>
   <div class="row">
