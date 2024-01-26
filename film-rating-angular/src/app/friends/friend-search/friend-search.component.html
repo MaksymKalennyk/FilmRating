@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <h2>Search user</h2>
+  <form (ngSubmit)="searchUser()" #searchForm="ngForm">
+    <div class="form-group">
+      <label for="searchTerm">Search User:</label>
+      <input type="text" class="form-control" id="searchTerm" name="searchTerm" [(ngModel)]="searchTerm">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div *ngIf="userFound" class="d-flex justify-content-center mt-4 mb-4">
+      <div class="card-body">
+        <h3>User Found:</h3>
+        <p class="card-title">Username: {{ user.username }}</p>
+        <p class="card-title">Email: {{ user.email }}</p>
+        <button (click)="subscribe()" type="button" class="btn btn-primary">Subscribe</button>
+      </div>
+    </div>
+</div>

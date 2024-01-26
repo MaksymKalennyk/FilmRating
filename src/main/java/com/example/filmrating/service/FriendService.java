@@ -1,6 +1,7 @@
 package com.example.filmrating.service;
 
 import com.example.filmrating.model.Friend;
+import com.example.filmrating.model.Users;
 import com.example.filmrating.repo.FriendRepository;
 import com.example.filmrating.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,16 +22,20 @@ public class FriendService {
         this.userRepository = userRepository;
     }
 
-    public Friend addFriend(Long userId, Long friendId) {
+    public void addFriend(Long userId, Long friendId) {
         if (friendRepository.existsByUsersIdAndFriendsId(userId, friendId)) {
             throw new IllegalStateException("Users are already friends");
         }
 
-        Friend friend = new Friend();
-        friend.setUsers(userRepository.getReferenceById(userId));
-        friend.setFriends(userRepository.getReferenceById(friendId));
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Users friend = userRepository.findById(friendId)
+                .orElseThrow(() -> new EntityNotFoundException("Friend not found"));
 
-        return friendRepository.save(friend);
+        Friend newFriend = new Friend();
+        newFriend.setUsers(user);
+        newFriend.setFriends(friend);
+        friendRepository.save(newFriend);
     }
 
     public void removeFriend(Long userId, Long friendId) {

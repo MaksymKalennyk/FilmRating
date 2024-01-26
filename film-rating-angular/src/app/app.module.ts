@@ -11,11 +11,16 @@ import { RatingComponent } from './rating/rating.component';
 import { SearchMovieComponent } from './rating/search-movie/search-movie.component';
 import { ReviewComponent } from './rating/review/review.component';
 import { AllReviewsComponent } from './rating/all-reviews/all-reviews.component';
+import { HeaderComponent } from './rating/header/header.component';
+import { FriendsComponent } from './friends/friends.component';
+import { FriendSearchComponent } from './friends/friend-search/friend-search.component';
+import { FriendListComponent } from './friends/friend-list/friend-list.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'rating', component: RatingComponent },
+  { path: 'friends', component: FriendsComponent },
 ];
 
 @NgModule({
@@ -26,7 +31,11 @@ const routes: Routes = [
     RatingComponent,
     SearchMovieComponent,
     ReviewComponent,
-    AllReviewsComponent
+    AllReviewsComponent,
+    HeaderComponent,
+    FriendsComponent,
+    FriendSearchComponent,
+    FriendListComponent,
   ],
     imports: [
         BrowserModule,

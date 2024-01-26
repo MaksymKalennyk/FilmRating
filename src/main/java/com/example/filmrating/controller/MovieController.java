@@ -18,9 +18,4 @@ public class MovieController {
     public Optional<Movies> findByName(@RequestParam("name") String name){
         return movieService.findMovieByName(name);
     }
-
-    @GetMapping("/movies")
-    public String doZaebis(){
-        return "doZaebis";
-    }
 }
