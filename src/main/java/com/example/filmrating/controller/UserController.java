@@ -1,11 +1,9 @@
 package com.example.filmrating.controller;
 
+import com.example.filmrating.model.Users;
 import com.example.filmrating.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -19,6 +17,11 @@ public class UserController {
         String token = extractTokenFromHeader(authorizationHeader);
 
         return userService.getUserIdFromToken(token);
+    }
+
+    @GetMapping("/search/friend")
+    public Users getUserByUsername(@RequestParam("username") String username){
+        return userService.getByUsername(username);
     }
 
     private String extractTokenFromHeader(String authorizationHeader) {

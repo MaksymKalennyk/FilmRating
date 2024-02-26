@@ -27,7 +27,7 @@ public class FriendController {
         try {
             friendService.addFriend(friendRequest.getUserId(), friendRequest.getFriendId());
             return ResponseEntity.ok().build();
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException | EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
